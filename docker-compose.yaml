@@ -1,0 +1,39 @@
+version: "3"
+services:
+  php-7.4-apache:
+    image: phongndq/php:7.4-apache
+    ports:
+      - 8074:80
+      - 44374:443
+      - "2274:22"
+    volumes:
+      - www-data:/home/www-data
+    command: bash -c "service ssh start && service apache2 reload & apache2-foreground"
+  code-server-3.5:
+    image: phongndq/code-server:3.5.0
+    ports:
+      - 8080:8080
+    volumes:
+       - www-data:/home/www-data
+    user: "www-data:www-data"
+  elasticsearch-7.6.2:
+    image: elasticsearch:7.6.2
+    ports:
+      - 9200:9200
+      - 9300:9300 
+    environment:
+      - ES_PATH_CONF=/home/www-data/elasticsearch-7.6.2/config
+      - discovery.type=single-node
+    volumes:
+      - www-data:/home/www-data
+  mysql-8.0:
+    image: phongndq/mysql:8.0
+    ports:
+      - 33068:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=1hAI3bOn5sAU
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - www-data:/home/www-data
+volumes:
+  www-data:
