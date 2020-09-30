@@ -1,0 +1,7 @@
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+path:
+  data: /home/www-data/elasticsearch-7.6.2/data
+  logs: /home/www-data/elasticsearch-7.6.2/log
+http.cors.enabled: true
+http.cors.allow-origin: /https?:\/\/app.elasticvue.com/
