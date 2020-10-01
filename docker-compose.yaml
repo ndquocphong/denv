@@ -35,9 +35,9 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - www-data:/home/www-data
-  redis-6.0:
-    image: redis:6.0
-    command: redis-server /home/www-data/redis-6.0/config/redis.conf
+  redis-5.0:
+    image: redis:5.0
+    command: redis-server /home/www-data/redis-5.0/config/redis.conf
     ports:
       - 6379:6379
     volumes:
