@@ -1,5 +1,32 @@
 version: "3"
 services:
+  php-5.6-apache:
+    image: phongndq/php:5.6-apache
+    ports:
+      - 8056:80
+      - 44356:443
+      - "2256:22"
+    volumes:
+      - www-data:/home/www-data
+    command: bash -c "service ssh start && service apache2 reload & apache2-foreground"
+  php-7.0-apache:
+    image: phongndq/php:7.0-apache
+    ports:
+      - 8070:80
+      - 44370:443
+      - "2270:22"
+    volumes:
+      - www-data:/home/www-data
+    command: bash -c "service ssh start && service apache2 reload & apache2-foreground"
+  php-7.2-apache:
+    image: phongndq/php:7.2-apache
+    ports:
+      - 8072:80
+      - 44372:80
+      - "2272:22"
+    volumes:
+      - www-data:/home/www-data
+    command: bash -c "service ssh start && service apache2 reload & apache2-foreground"
   php-7.4-apache:
     image: phongndq/php:7.4-apache
     ports:
@@ -24,6 +51,14 @@ services:
     environment:
       - ES_PATH_CONF=/home/www-data/elasticsearch-7.6.2/config
       - discovery.type=single-node
+    volumes:
+      - www-data:/home/www-data
+  mysql-5.7:
+    image: phongndq/mysql:5.7
+    ports:
+      - 33057:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=1hAI3bOn5sAU
     volumes:
       - www-data:/home/www-data
   mysql-8.0:
