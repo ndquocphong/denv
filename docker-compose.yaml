@@ -77,6 +77,18 @@ services:
       - 6379:6379
     volumes:
       - www-data:/home/www-data
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1080:1080
+  aspnet-3.5.1:
+    image: phongndq/aspnet:3.5.1
+    ports:
+      - 4099:4099
+      - 4199:4199
+    volumes:
+      - www-data:/home/www-data
+    command: "tail -f /dev/null"
 volumes:
   www-data:
     external: true
